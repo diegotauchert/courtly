@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo } from 'next/font/google'
-import '@/assets/globals.css'
+import '@/styles/globals.css'
+import { cn } from "@/lib/utils"
 
 const archivo = Archivo({ subsets: ['latin'] })
 
@@ -16,8 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={archivo.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          archivo.className
+        )}
+      >{children}</body>
     </html>
   );
 }
