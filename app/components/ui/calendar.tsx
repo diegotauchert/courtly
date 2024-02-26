@@ -3,22 +3,40 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
-
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { isSameDay, isSameMonth } from "date-fns"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 function Calendar({
   className,
   classNames,
+  availableDays = [],
   showOutsideDays = true,
   ...props
-}: CalendarProps) {
+}: CalendarProps & { availableDays?: Date[] }) {
+  const [currentMonth, setCurrentMonth] = React.useState<Date>(new Date());
+  const hasCurrentMonthAvailableDates = availableDays.some((availableDay) => isSameMonth(currentMonth, availableDay));
+  
+  const isDayDisabled = (day: Date) => !availableDays.some((availableDay) => isSameDay(day, availableDay));
+
+  const modifiers: { [key: string]: any } = {
+    available: availableDays,
+  };
+
+  if (!hasCurrentMonthAvailableDates) {
+    modifiers.hidden = (day: Date) => !isSameMonth(day, currentMonth);
+  }
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
+      modifiers={modifiers}
+      month={currentMonth}
+      onMonthChange={(month) => setCurrentMonth(month)}
+      disabled={isDayDisabled}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -39,19 +57,22 @@ function Calendar({
         cell: "h-12 w-12 md:w-16 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-full [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-full focus-within:relative focus-within:z-20 !rounded-full",
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-16 w-16 p-0 font-medium aria-selected:opacity-100 !rounded-full text-gray-500 relative"
+          "h-16 w-16 p-0 font-medium aria-selected:opacity-100 !rounded-full relative"
         ),
         day_range_end: "day-range-end",
         day_selected:
           "bg-primary text-primary-foreground font-bold hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
         day_today: "relative before:absolute before:bottom-1 before:left-1/2 before:transform before:-translate-x-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-primary before:content",
         day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
-        day_disabled: "text-muted-foreground opacity-50",
+          "day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+        day_disabled: "text-muted-foreground cursor-not-allowed",
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
+      }}
+      modifiersStyles={{
+        outside: { visibility: hasCurrentMonthAvailableDates ? 'hidden' : 'visible' },
       }}
       components={{
         IconLeft: ({ ...props }) => <ChevronLeft className="h-5 w-5" />,
