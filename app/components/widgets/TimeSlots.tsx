@@ -17,12 +17,36 @@ const TimeSlotsWidget = memo(() => {
   };
 
   return (
-    <div className="flex items-start justify-center flex-col md:mr-8">
+    <div className="flex w-full items-start justify-center flex-col md:mr-8">
       <Label className="mb-5 text-md mt-1.5 whitespace-nowrap">{formattedDate}</Label>
-      <div className="slots space-y-4">
+      <div className="slots w-full space-y-4">
         {
           times && times?.length > 0 ? 
-            times.map((slot) => <Button key={slot} variant="outline" size="lg" active={slot === selectedTime} onClick={() => handleButtonClick(slot)}>{slot}</Button>) : 
+            times.map((slot) => 
+              ( 
+                <div key={slot} className="flex w-full flex-row items-center gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    active={slot === selectedTime} 
+                    onClick={() => handleButtonClick(slot)}
+                  >
+                      {slot}
+                  </Button>
+
+                  {slot === selectedTime && (
+                    <Button 
+                      variant="success" 
+                      size="lg" 
+                      active={slot === selectedTime} 
+                      onClick={() => {}}
+                    >
+                      Next
+                    </Button>
+                  )}
+                </div>
+              )
+            ) : 
             <span>Busy day, we have no free time today</span>
           }
       </div>

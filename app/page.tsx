@@ -15,7 +15,7 @@ const Home = () => {
   const hasDateSelected = Boolean(selectedDate);
 
   return (
-    <Container>
+    <Container fitWidth={!Boolean(selectedDate)}>
       <div className="md:w-2/6 border-0 border-solid border-r border-gray-200 p-7">
         <h2 className="flex items-center text-2xl font-bold mb-8 leading-5">
           {hasDateSelected && 

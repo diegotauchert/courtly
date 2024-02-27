@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="box-content">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased mx-auto flex justify-center w-fit",
+          "min-h-screen bg-background font-sans antialiased mx-auto flex justify-center",
           archivo.className
         )}
       >
