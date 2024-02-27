@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo } from 'next/font/google'
 import '@/styles/globals.css'
 import { cn } from "@/lib/utils"
+import AppProvider from '@/providers/AppProvider';
 
 const archivo = Archivo({ subsets: ['latin'] })
 
@@ -17,13 +18,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="box-content">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased mx-auto flex justify-center w-fit",
           archivo.className
         )}
-      >{children}</body>
+      >
+        <AppProvider>
+          {children}
+        </AppProvider>
+      </body>
     </html>
   );
 }
