@@ -7,7 +7,7 @@ import { AppContext } from "@/contexts/AppContext";
 export function CalendarWidget() {
   const { selectedDate, setSelectedDate } = useContext(AppContext);
   const _Mock_availableDays = availableDates();
-  
+
   return (
     <Calendar
       mode="single"
@@ -15,7 +15,7 @@ export function CalendarWidget() {
       onSelect={(date) => setSelectedDate(date as Date)}
       availableDays={_Mock_availableDays.map(day => day.date)}
       showOutsideDays={true}
-      className="p-0 mr-12"
+      className="p-0 md:mr-12"
     />
   );
 }

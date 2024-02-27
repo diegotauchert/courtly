@@ -7,7 +7,6 @@ import { Send, Calendar, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { format } from 'date-fns';
 import SuccessAnimation from '@/components/widgets/SuccessAnimation';
-
 import {
   Form,
   FormControl,
@@ -43,8 +42,13 @@ export function FormUser() {
   }
 
   const onSubmit = async (data: ProfileFormValues) => {
-    toast(`Hi ${data.name}, your appointment was made successfully.`, {
-      description: `Check your email ${data.email} and get the link`
+    toast.success(`Hi ${data.name}, your appointment was made successfully.`, {
+      description: `Check your email ${data.email} and get the link`,
+      action: {
+        label: "Close",
+        onClick: () => console.log("Close"),
+      },
+      position: 'top-right'
     })
     setShowAnimation(true)
     await finishSchedule()
