@@ -1,0 +1,19 @@
+version: '1'
+services:
+  dev:
+    container_name: minthouse
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    hostname: minthouse
+    image: minthouse
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - img=node:18.19.1
+    ports:
+      - "3006:3000"
+    volumes:
+      - '.:/app'
+    tty: true
