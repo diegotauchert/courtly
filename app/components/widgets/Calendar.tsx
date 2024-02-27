@@ -11,7 +11,7 @@ export function CalendarWidget() {
   return (
     <Calendar
       mode="single"
-      selected={selectedDate}
+      selected={selectedDate || undefined}
       onSelect={(date) => setSelectedDate(date as Date)}
       availableDays={_Mock_availableDays.map(day => day.date)}
       showOutsideDays={true}

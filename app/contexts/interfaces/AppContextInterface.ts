@@ -8,5 +8,7 @@ export interface AppContextInterface {
   location: string | null, 
   setLocation: Dispatch<SetStateAction<string | null>>,
   duration: string | null, 
-  setDuration: Dispatch<SetStateAction<string | null>>
+  setDuration: Dispatch<SetStateAction<string | null>>,
+  showLastForm: boolean, 
+  setShowLastForm: Dispatch<SetStateAction<boolean>>
 }

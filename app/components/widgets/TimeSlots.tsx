@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { timeSlot } from "app/data";
 
 const TimeSlotsWidget = memo(() => {
-  const { selectedDate, setSelectedTime, selectedTime } = useContext(AppContext);
+  const { selectedDate, setSelectedTime, selectedTime, setShowLastForm } = useContext(AppContext);
   const formattedDate = selectedDate ? format(new Date(selectedDate), 'EEEE, MMMM d') : '';
   const times = timeSlot(selectedDate);
 
@@ -39,7 +39,7 @@ const TimeSlotsWidget = memo(() => {
                       variant="success" 
                       size="lg" 
                       active={slot === selectedTime} 
-                      onClick={() => {}}
+                      onClick={() => setShowLastForm(true)}
                     >
                       Next
                     </Button>

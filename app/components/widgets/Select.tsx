@@ -18,25 +18,28 @@ type ISelectWidget = {
   label: string
   data: IData[]
   setValue: Dispatch<SetStateAction<string | null>>
+  selectValue: string | null
 }
- 
-export const SelectWidget = ({label, data, setValue}: ISelectWidget) => {
+
+export const SelectWidget = ({label, data, setValue, selectValue}: ISelectWidget) => {
   const selectId = `${label.toLowerCase()}-select`;
 
-  const handleSelectChange = (selectedValue: string | null) => {
-    setValue(selectedValue);
+  const handleSelectChange = (val: string | null) => {
+    setValue(val);
   };
+
+  const defaultPlaceholder = selectValue || "- Choose One"; 
 
   return data ? (
     <div>
-      <Label htmlFor={selectId} className="text-md text-gray-600 font-semibold mb-1 block">{label}</Label>
+      <Label htmlFor={selectId} className="text-md text-gray-600 font-semibold mb-1 block">{label} *</Label>
       <Select onValueChange={handleSelectChange}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder={label} />
+          <SelectValue placeholder={defaultPlaceholder} />
         </SelectTrigger>
         <SelectContent id={selectId} className="bg-white">
           <SelectGroup>
-            <SelectLabel>{label}</SelectLabel>
+            <SelectLabel>{defaultPlaceholder}</SelectLabel>
             {data.map(({key, value}: IData) => <SelectItem key={key} value={value}>{value}</SelectItem>)}
           </SelectGroup>
         </SelectContent>
