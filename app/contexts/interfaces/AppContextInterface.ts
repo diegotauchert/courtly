@@ -10,5 +10,6 @@ export interface AppContextInterface {
   duration: string | null, 
   setDuration: Dispatch<SetStateAction<string | null>>,
   showLastForm: boolean, 
-  setShowLastForm: Dispatch<SetStateAction<boolean>>
+  setShowLastForm: Dispatch<SetStateAction<boolean>>,
+  resetForm: Function
 }

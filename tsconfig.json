@@ -24,6 +24,7 @@
       "@/contexts/*": ["app/contexts/*"],
       "@/providers/*": ["app/providers/*"],
       "@/lib/*": ["app/lib/*"],
+      "@/json/*": ["app/json/*"],
       "@/schema/*": ["app/schema/*"]
     }
   },

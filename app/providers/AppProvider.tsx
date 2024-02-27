@@ -14,8 +14,14 @@ export default function AppProvider({ children }: IAppProviderProps) {
   const [duration, setDuration] = useState<string | null>(null);
   const [showLastForm, setShowLastForm] = useState<boolean>(false);
 
+  const resetForm = () => {
+    setSelectedTime(null)
+    setSelectedDate(null)
+    setShowLastForm(false)
+  }
+
   return (
-    <AppContext.Provider value={{ selectedDate, setSelectedDate, selectedTime, setSelectedTime, location, setLocation, duration, setDuration, showLastForm, setShowLastForm }}>
+    <AppContext.Provider value={{ selectedDate, setSelectedDate, selectedTime, setSelectedTime, location, setLocation, duration, setDuration, showLastForm, setShowLastForm, resetForm }}>
       {children}
     </AppContext.Provider>
   );
