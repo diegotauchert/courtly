@@ -31,3 +31,6 @@ npm run dev
 ```
 
 Open on browser [http://localhost:3000](http://localhost:3000) .
+
+Tutorial:
+[https://minthousedev.notion.site/Minthouse-Take-Home-Challenge-61f814be6b0d4a258f7717ec46eda760](https://minthousedev.notion.site)
